@@ -1,0 +1,36 @@
+/* Для всех кнопок */
+button {
+    background-color: #d8beeb;
+    color: black;
+    padding: 10px 10px;
+    margin: 8px 0;
+}
+/* логин и пароль */
+input[type=text], input[type=password] {
+    width: 80%;
+    padding: 10px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#main {
+    width: 400px;
+    margin-left: 50px;
+    background-color: #bee5eb;
+    font-size: 16px;
+}
+#title {
+    margin: 0 100px 0 0; /* Отступ на ширину левой и правой колонки*/
+    font-family: cursive;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e34444;
+}
+.flashes{
+    font-family: cursive;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px
+    border: 1px solid #ff0000;
+    background: #f7de60;
+}
