@@ -116,13 +116,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#Напитки">Напитки</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Прочие блюда">Прочие блюда</a>
+                    </li>
 				</ul>
                 <!-- Строка поиска -->
                 <div class="search-box">
-                    <input type="text" class="form-control" placeholder="Поиск рецептов">
-                    <button class="btn btn-outline-success" type="button">
-                        <i class="bi bi-search"></i> <!-- Иконка лупы из Bootstrap Icons -->
-                    </button>
+                    <form action="{{ url_for('search') }}" method="GET" class="d-flex">
+                        <input type="text" name="search_query" class="form-control" placeholder="Поиск рецептов" required>
+                        <select name="search_mode" class="form-select mx-2">
+                            <option value="all">Все ингредиенты</option>
+                            <option value="any">Хотя бы один ингредиент</option>
+                        </select>
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="bi bi-search"></i> <!-- Иконка лупы -->
+                        </button>
+                    </form>
                 </div>
 			</div>
 		</div>
@@ -144,10 +153,11 @@
     "Закуски": 61,
     "Соусы": 71,
     "Десерты": 81,
-    "Напитки": 91
+    "Напитки": 91,
+    "Прочие блюда": 101
 } %}
 
-{% for count in range(1, 101) %}
+{% for count in range(1, 150) %}
     {% set feature_key = 'recipe' ~ count %}
     {% if json_data.get(feature_key) %}
 
@@ -178,10 +188,22 @@
                         Сладкие угощения, чтобы завершить трапезу на высокой ноте.
                     {% elif section_name == "Напитки" %}
                         Напитки для любой ситуации: согревающие, освежающие или бодрящие.
+                    {% elif section_name == "Прочие блюда" %}
+                        Разнообразные блюда, которые не входят в основные категории, но удивят своим вкусом.
                     {% endif %}
                 </p>
             {% endif %}
         {% endfor %}
+
+        <!-- Проверяем категорию "Прочие блюда" -->
+        {% if count == sections['Прочие блюда'] %}
+            <h2 id="Прочие блюда" class="section-title">
+                Прочие блюда
+            </h2>
+            <p class="section-description">
+                Разнообразные блюда, которые не входят в основные категории, но удивят своим вкусом.
+            </p>
+        {% endif %}
 
         <section id="recipe{{ count }}" class="container mt-4">
             <div class="row align-items-center">

@@ -1,3 +1,57 @@
+<style>
+	.tab-content {
+		max-width: 100%; /* Ограничение ширины контейнера */
+		padding: 20px; /* Отступы внутри контейнера */
+	}
+
+	.tab-pane {
+		margin-bottom: 20px; /* Отступ между блоками */
+	}
+
+	.tab-pane img {
+		max-width: 100%; /* Ограничение ширины изображения */
+		height: auto; /* Сохранение пропорций */
+		display: block; /* Убирает лишние отступы вокруг изображения */
+		border: 1px solid #ccc; /* Рамка вокруг изображения */
+		padding: 5px; /* Отступ внутри рамки */
+		margin-bottom: 10px; /* Отступ снизу */
+	}
+
+	.tab-pane input[type="text"],
+	.tab-pane textarea {
+		width: 100%; /* Ширина input и textarea на всю доступную ширину */
+		max-width: 600px; /* Максимальная ширина */
+		padding: 8px; /* Внутренние отступы */
+		margin-bottom: 10px; /* Отступ снизу */
+		border: 1px solid #ccc; /* Рамка */
+		border-radius: 4px; /* Скругление углов */
+		font-size: 16px; /* Размер шрифта */
+	}
+
+	.tab-pane textarea {
+		height: 150px; /* Высота textarea */
+		resize: vertical; /* Разрешить изменение высоты только вертикально */
+	}
+
+	.tab-pane input[type="file"] {
+		margin-bottom: 10px; /* Отступ снизу */
+	}
+
+	.tab-pane button {
+		padding: 10px 20px; /* Отступы внутри кнопки */
+		font-size: 16px; /* Размер шрифта */
+		border: none; /* Убрать рамку */
+		background-color: #007bff; /* Цвет фона */
+		color: white; /* Цвет текста */
+		border-radius: 4px; /* Скругление углов */
+		cursor: pointer; /* Курсор в виде указателя */
+	}
+
+	.tab-pane button:hover {
+		background-color: #0056b3; /* Цвет фона при наведении */
+	}
+</style>
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2">Добро пожаловать в Админ-Панель</h1>
@@ -33,7 +87,24 @@
 							<button type="submit" class="btn btn-primary">Сохранить изменения</button>
 						<br><br><br>
 						</form>
+
+						<!-- Кнопка для удаления рецепта -->
+						<form method="post" action="delete_content">
+							<input type="hidden" name="id" value="{{ item.id }}">
+							<button type="submit" class="btn btn-danger mt-2">Удалить рецепт</button>
+						</form>
+						<br><br><br>
 					{% endfor %}
+						<!-- Секция для добавления нового рецепта -->
+						<form method="post" action="add_content" enctype="multipart/form-data">
+							<h3><input type="text" name="short_title" placeholder="Краткий заголовок" required></h3>
+							<p><input type="text" name="altimg" placeholder="Описание изображения" required></p>
+							<input type="file" name="img" required>
+							<p><input type="text" name="title" placeholder="Заголовок рецепта" required></p>
+							<p><textarea name="contenttext" placeholder="Текст рецепта" required></textarea></p>
+							<input type="hidden" name="idblock" value="101">  <!-- Прочие блюда -->
+							<button type="submit" class="btn btn-success">Добавить новое блюдо в "Прочие блюда"</button>
+						</form>						
 				</div>
 			{% endfor %}
 		</div>
